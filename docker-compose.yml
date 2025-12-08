@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql/mysql-server:8.0.32
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: khanakhajana
+      MYSQL_USER: application
+      MYSQL_PASSWORD: pass
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database.sql:/docker-entrypoint-initdb.d/database.sql
+      - ./insert.sql:/docker-entrypoint-initdb.d/insert.sql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u application -ppass || exit 1"]
+      timeout: 3s
+      interval: 5s
+      retries: 3
+      start_period: 10s
+
+  app:
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      APP_PORT: 8080
+      MYSQL_USER: application
+      MYSQL_PASSWORD: pass
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE: khanakhajana
+      
+volumes:
+  mysql_data:
