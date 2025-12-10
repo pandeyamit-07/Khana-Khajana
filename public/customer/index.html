@@ -1499,13 +1499,13 @@
         // Show breakfast items by default and set up category switching
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                const response = await fetch("http://localhost:8080/api/item");
+                const response = await fetch("/api/item");
                 const data = await response.json();
 
                 const menuGrid = document.querySelector(".menu-grid");
                 menuGrid.innerHTML = data.map(d => {
                     return `<div class="menu-item" data-category="${d.category}">
-                        <img src="http://localhost:8080/${d.image_url}" alt="${d.item_name}">
+                        <img src="/${d.image_url}" alt="${d.item_name}">
                         <div class="menu-item-content">
                             <span style="display: none;">${d.item_id}</span>
                             <h3>${d.item_name}</h3>
@@ -1771,10 +1771,9 @@
             }
 
             console.log(orderData);
-
             try {
                 // Send POST request to the API
-                const response = await fetch('http://localhost:8080/api/order', {
+                const response = await fetch('/api/order', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
