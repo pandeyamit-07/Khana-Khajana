@@ -342,8 +342,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(staticPath, "customer", "index.html"))
 });
 
-const port = Number(process.env.APP_PORT || 8080);
 
-server.listen(port, () => {
-    console.log(`Server started on http://localhost:${port}`);
+const PORT = process.env.PORT || 8080;
+
+server.listen(PORT, () => {
+    console.log(`Server started on http://localhost:${PORT}`);
 });
