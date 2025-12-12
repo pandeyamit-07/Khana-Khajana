@@ -1,3 +1,5 @@
+https://khana-khajana-eayz.onrender.com
+
 Here’s a clean `README.md` you can copy-paste and adjust if needed:
 
 ````markdown
@@ -131,5 +133,6 @@ json: {
 then go through on local host://8080 for customer pannel
 and /admin for admin pannel and login through your username and password 
 }
+
 
 make a readme file in english
